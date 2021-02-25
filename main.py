@@ -4,16 +4,17 @@ from utils.database import Database
 from discord.ext import commands as cmd
 from discord.ext.commands import Bot
 from datetime import datetime
-import secrets
 
 
-version = "0.0.1"
+
+version = "0.0.1.5"
 
 intents = discord.Intents.default()
 intents.members = True
 bot = Bot(intents=intents, command_prefix="!")
 bot.remove_command('help')
 db = Database()
+db.init_table()
 
 @bot.event
 async def on_ready():
@@ -61,6 +62,18 @@ async def blackmail(context, message: str, user: discord.User):
         await context.send(embed=embed)
     else:
         await context.send("Something went wrong")
+
+@bot.command(name="delete", pass_context=True)
+async def delete_blackmail(context, id):
+    try:
+        check_owner = db.get_specific_from_owner(context.author.id, id)
+        if check_owner[1] == "0":
+            await context.send("You are not the owner of this")
+        else:
+            db.delete_one(id)
+            await context.send("Message has been successfully deleted.")
+    except Error as e:
+        print(e)
 
 @bot.command(pass_context=True, name="get")
 async def get_blackmail(context, ID):
