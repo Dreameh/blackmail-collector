@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "e52806829cb4780b85d60ad56771349ae37ab96d797673935bc693a008995737"
+            "sha256": "98f650a3bcf8cb3ace64797db98810c62dcc36f5ddfd25364e656e7d740cdc6f"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -58,6 +58,14 @@
             ],
             "markers": "python_version >= '3.6'",
             "version": "==3.7.3"
+        },
+        "aiosqlite": {
+            "hashes": [
+                "sha256:6c49dc6d3405929b1d08eeccc72306d3677503cc5e5e43771efc1e00232e8231",
+                "sha256:f0e6acc24bc4864149267ac82fb46dfb3be4455f99fe21df82609cc6e6baee51"
+            ],
+            "index": "pypi",
+            "version": "==0.17.0"
         },
         "async-timeout": {
             "hashes": [
@@ -140,6 +148,14 @@
             ],
             "markers": "python_version >= '3.6'",
             "version": "==5.1.0"
+        },
+        "path": {
+            "hashes": [
+                "sha256:bb629aefd86825bf21c8bcfa0f8691a6e5abdc3e43d50b626fe6aac5b13f60b7",
+                "sha256:e07601c83ae394cb05298c96e073c251d185599ecbf3cf7110b00f4d1898d53e"
+            ],
+            "index": "pypi",
+            "version": "==15.1.2"
         },
         "python-dotenv": {
             "hashes": [

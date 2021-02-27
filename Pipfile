@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 "discord.py" = "*"
 python-dotenv = "*"
+aiosqlite = "*"
+path = "*"
 
 [dev-packages]
 
