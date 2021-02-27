@@ -10,3 +10,4 @@
 
 Not much to write about at this moment.
 
+[MIT License](LICENSE)
