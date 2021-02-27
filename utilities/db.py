@@ -33,7 +33,6 @@ def get_one(blackmail_id: int):
     c = conn.cursor()
     c.execute('SELECT * FROM blackmail WHERE id=?', (blackmail_id,))
     fetched = c.fetchone()
-    print(fetched.keys())
     conn.close()
     if not fetched:
         raise Exception("Nothing was fetched")
@@ -56,19 +55,37 @@ def is_owner_of_blackmail(owner: int, blackmail_id: int):
 def get_all_from_owner(owner: int):
     conn = db_connect()
     c = conn.cursor()
-    c.execute("SELECT * FROM blackmail WHERE owner=?", (owner,))
+    c.execute("SELECT * FROM blackmail WHERE owner=? LIMIT 0,20", (owner,))
     fetched = c.fetchall()
     conn.close()
     return fetched
+
+
+def count_all_from_owner(owner: int):
+    conn = db_connect()
+    c = conn.cursor()
+    c.execute("SELECT COUNT(*) FROM blackmail where owner=?", (owner,))
+    fetched = c.fetchone()
+    conn.close()
+    return int(fetched)
 
 
 def get_all_from_target(target: int):
     conn = db_connect()
     c = conn.cursor()
-    c.execute("SELECT * FROM blackmail WHERE said_by_user=?", (target,))
+    c.execute("SELECT * FROM blackmail WHERE said_by_user=? LIMIT 0,20", (target,))
     fetched = c.fetchall()
     conn.close()
     return fetched
+
+
+def count_all_from_target(owner: int):
+    conn = db_connect()
+    c = conn.cursor()
+    c.execute("SELECT COUNT(*) FROM blackmail where owner=?", (owner,))
+    fetched = c.fetchone()
+    conn.close()
+    return int(fetched)
 
 
 def delete_one(blackmail_id: int):
