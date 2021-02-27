@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from cogs import blackmail
 from utilities import migration
 
-version = "0.0.2"
+version = "0.0.3"
 
 # Setup bot
 intents = discord.Intents.default()
