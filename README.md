@@ -6,7 +6,7 @@
 
 ---
 
-Currently, the blackmail collector bot has three commands:
+Currently, the blackmail collector bot some commands:
 
 - **get** (id) gets specific blackmail item
 - **add** (message) (@user) adds new blackmail item to your list of currently available blackmail material
