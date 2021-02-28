@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from cogs import blackmail
 from utilities import migration
 
-version = "0.0.4"
+version = "0.1.0"
 
 # Setup bot
 intents = discord.Intents.default()
@@ -44,12 +44,6 @@ def main():
         load_dotenv()
         token = os.getenv('token_secret')
         bot.run(token)
-    except discord.PrivilegedIntentsRequired:
-        print(
-            "Privileged Intents are required to use this bot. "
-            "Enable them through the Discord Developer Portal.")
-    except discord.DiscordException as e:
-        print(e)
     except Exception as e:
         print("Environment has not been set: <" + str(e) + ">.")
 

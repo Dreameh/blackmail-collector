@@ -9,8 +9,12 @@ if not DBPATH:
 
 
 def db_connect():
-    conn = sqlite3.connect(str(DBPATH))
-    return conn
+    try:
+        conn = sqlite3.connect(str(DBPATH))
+        conn.row_factory = sqlite3.Row
+        return conn
+    except sqlite3.Error as e:
+        print(e)
 
 
 def add(blackmail):
@@ -28,18 +32,6 @@ def add(blackmail):
     return fetched
 
 
-def get_one(blackmail_id: int):
-    conn = db_connect()
-    c = conn.cursor()
-    c.execute('SELECT * FROM blackmail WHERE id=?', (blackmail_id,))
-    fetched = c.fetchone()
-    conn.close()
-    if not fetched:
-        raise Exception("Nothing was fetched")
-    else:
-        return fetched
-
-
 def is_owner_of_blackmail(owner: int, blackmail_id: int):
     conn = db_connect()
     c = conn.cursor()
@@ -52,15 +44,6 @@ def is_owner_of_blackmail(owner: int, blackmail_id: int):
         return False
 
 
-def get_all_from_owner(owner: int):
-    conn = db_connect()
-    c = conn.cursor()
-    c.execute("SELECT * FROM blackmail WHERE owner=? LIMIT 0,20", (owner,))
-    fetched = c.fetchall()
-    conn.close()
-    return fetched
-
-
 def count_all_from_owner(owner: int):
     conn = db_connect()
     c = conn.cursor()
@@ -68,15 +51,6 @@ def count_all_from_owner(owner: int):
     fetched = c.fetchone()
     conn.close()
     return int(fetched)
-
-
-def get_all_from_target(target: int):
-    conn = db_connect()
-    c = conn.cursor()
-    c.execute("SELECT * FROM blackmail WHERE said_by_user=? LIMIT 0,20", (target,))
-    fetched = c.fetchall()
-    conn.close()
-    return fetched
 
 
 def count_all_from_target(owner: int):
@@ -110,3 +84,10 @@ def check_if_entry_exists(blackmail_id: int):
         return True
     else:
         return False
+
+
+def query_db(query, args=(), one=False):
+    cur = db_connect().execute(query, args)
+    rv = cur.fetchall()
+    cur.close()
+    return (rv[0] if rv else None) if one else rv
